@@ -1,0 +1,3 @@
+/home/cyansky/Documents/c++/td_game/build/CMakeFiles/td_game.dir
+/home/cyansky/Documents/c++/td_game/build/CMakeFiles/edit_cache.dir
+/home/cyansky/Documents/c++/td_game/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/td_game.dir/src/main.cpp.o -o td_game  /usr/lib64/libsfml-graphics.so.2.5.1 /usr/lib64/libsfml-window.so.2.5.1 /usr/lib64/libsfml-system.so.2.5.1 
