@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Rect.hpp>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,6 +11,30 @@ sf::Color Brown = sf::Color(103, 71, 71);
 sf::Color Red = sf::Color(249, 102, 102);
 sf::Color Green = sf::Color(130, 148, 96);
 sf::Color Grey = sf::Color(238, 238, 238);
+
+class Button{
+    public:
+        sf::RectangleShape button;
+        sf::IntRect button_rect;
+        sf::Text button_text;
+        Button(float height, float width, float x, float y, std::string text, sf::Font font){
+            button.setPosition(x, y);
+            button.setSize(sf::Vector2f(width, height));
+            
+            button_rect.left = x;
+            button_rect.top = y;
+            button_rect.height = height;
+            button_rect.width = width;
+
+            button_text.setFont(font);
+            button_text.setScale(5,5);
+            button_text.setPosition(x*6/5, y*6/5);
+            button_text.setFillColor(sf::Color::Yellow);
+
+        };
+};
+
+
 
 class TileMap : public sf::Drawable, public sf::Transformable
 {
@@ -155,7 +180,7 @@ int main()
 
     sf::Text MainTitle("Hold the line", pixel_font, 256);
         MainTitle.setFillColor(sf::Color::Yellow);
-        MainTitle.setPosition(sf::Vector2f(SCREEN_WIDTH/8, 25));
+        MainTitle.setPosition(sf::Vector2f(SCREEN_WIDTH/8, 10));
 
     const int level[] =
     {
@@ -175,42 +200,7 @@ int main()
     map.scale(5, 5);
 
     int background_tile_num = 258;
-    const int Background_grid[] =
-    {
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-        background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num, background_tile_num,
-    };
+    const int* Background_grid = new int[512] {0};
 
 
     TileMap Background;
@@ -225,6 +215,7 @@ int main()
     Wave wave0(ennemie_list);
     wave0.print_wave();
 
+    Button start_game_button(200, 400, SCREEN_WIDTH/4, SCREEN_HEIGHT/4, "Start", pixel_font);
 
 
     while (window.isOpen())
@@ -241,6 +232,8 @@ int main()
         window.draw(Background);
         window.draw(Menu_background);
         window.draw(MainTitle);
+        window.draw(start_game_button.button);
+        window.draw(start_game_button.button_text);
         window.display();
     }
 
